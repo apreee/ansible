@@ -1,0 +1,25 @@
+---
+- name: Enable intranet service
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: To stop the service
+      service:
+        name: httpd
+        state: started
+      tags: 
+         - state1     
+    - name: latest version httpd 
+      yum:
+        name: httpd      
+        state: absent
+      tags: 
+        - remove
+
+    - name: Uninstall the package
+      yum: 
+        name:
+           - httpd
+        state: latest
+      tags:
+         - add

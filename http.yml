@@ -1,0 +1,17 @@
+---
+- name: webserver setup
+  hosts: all 
+  become: yes
+  tasks: 
+    - name: To install httpd  
+      yum:
+        name: httpd
+        state: present
+    - name: copy file
+      copy:
+        src: tst.html
+        dest: /var/www/html/index.html
+    - name: start httpd
+      service:
+        name: httpd
+        state: restarted
